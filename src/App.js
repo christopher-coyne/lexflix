@@ -1,24 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Chatbot from './screens/Chatbot'
+import { useState } from "react"
 
+const random_num = () => Math.floor(Math.random() * 10000)
+
+const metadata_start = {'sessionStarted': false, 'sessionId': random_num(), 'sessionState': {}}
 function App() {
+  const [userLogs, setUserLogs] = useState([])
+  const [botLogs, setBotLogs] = useState([{'content': 'i am the imdb bot. how can i help you today?'}])
+  const [metadata, setMetadata] = useState(metadata_start)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Chatbot userLogs={userLogs} setUserLogs={setUserLogs} botLogs={botLogs} setBotLogs={setBotLogs} metadata={metadata} setMetadata={setMetadata}/>
   );
 }
 
