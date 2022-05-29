@@ -12,13 +12,6 @@ const Chatbot = ({setUserLogs, userLogs, botLogs, setBotLogs, metadata, setMetad
   const submitHandler = e => {
     e.preventDefault()
 
-    /*
-    if (metadata['sessionStarted'] == false) {
-        console.log('session started is false!')
-        setMetadata({...metadata, sessionStarted: true})
-        firstTime = true
-    }
-    */
     const newMessage = {'text': userInput, 'sessionId': metadata['sessionId'], 'sessionStarted': metadata['sessionStarted'], 'sessionState': metadata['sessionState']}
     console.log('sending new message... ', newMessage)
     axios.post('https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot', newMessage).then(value => {
@@ -32,7 +25,14 @@ const Chatbot = ({setUserLogs, userLogs, botLogs, setBotLogs, metadata, setMetad
         }
 
         console.log('fixed parsed : ', parsed)
+        console.log('session attributes : ', parsed.sessionState.sessionAttributes)
         setBotLogs([...botLogs, {'content': value.data.body}])
+
+        // if we have fulfilled getrecs (or anything...), then reset 
+        if (parsed.sessionState.intent.state === 'Fulfilled') {
+            console.log('fulfilled! reset')
+            setMetadata({...metadata, sessionState: {'sessionState': {'intent': {'name': 'FallbackIntent', slots: {}}}, 'sessionAttributes': {'movies': 'mymovie'}}, sessionStarted: true})
+        }
         setMetadata({...metadata, sessionState: parsed.sessionState, sessionStarted: true})
     })
 
