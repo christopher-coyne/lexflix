@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.userMessages {
+  border: 5px solid red;
+}
+
+.botMessages {
+  border: 5px solid blue;
+}
+
+.oxygen {
+  font-family: oxygen;
+}
