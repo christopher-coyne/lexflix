@@ -1,19 +1,22 @@
 import React from "react";
-import Logs from "../../components/Logs";
+import Logs from "../../components/Logs/Logs";
 import Navbar from "../../components/Navbar";
-import { useState } from "react";
+import Submit from "../../components/Submit/Submit";
+import IntroCard from "../../components/IntroCard/IntroCard";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./Chatbot.css";
 
-const Chatbot = ({
-  setUserLogs,
-  userLogs,
-  botLogs,
-  setBotLogs,
-  metadata,
-  setMetadata,
-}) => {
+const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   const [userInput, setUserInput] = useState("");
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(scrollToBottom, [messages]);
+  let newUserMessage = "";
   const updateInput = (e) => {
     setUserInput(e.target.value);
   };
@@ -27,6 +30,7 @@ const Chatbot = ({
       sessionState: metadata["sessionState"],
     };
     console.log("sending new message... ", newMessage);
+    /*
     axios
       .post(
         "https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot",
@@ -54,7 +58,7 @@ const Chatbot = ({
           "session attributes : ",
           parsed.sessionState.sessionAttributes
         );
-        setBotLogs([...botLogs, { content: value.data.body }]);
+        setMessages([...messages, { content: value.data.body, type: 'bot' }]);
 
         // if we have fulfilled getrecs (or anything...), then reset
         if (parsed.sessionState.intent.state === "Fulfilled") {
@@ -75,31 +79,60 @@ const Chatbot = ({
           });
         }
       });
+      */
 
-    setUserLogs([...userLogs, { content: userInput }]);
+    newUserMessage = userInput.slice();
+
+    setMessages([
+      ...messages,
+      { content: newUserMessage, type: "user" },
+      { content: "yeah that makes sense bro", type: "bot" },
+    ]);
+
+    /* take this out when fully testing */
+
     setUserInput("");
   };
   return (
     <>
-      <Navbar />
-      <div>
-        <div className="yellow">
-          <Logs messages={userLogs} />
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen relative">
+        <Navbar />
+        <div className="container h-[65%] w-11/12 overflow-y-auto absolute left-0 right-0 mx-auto my-auto top-20 border-yellow border-4">
+          <div className="container h-[100%] w-7/12 mx-auto">
+            <IntroCard />
+            <Logs messages={messages} />
+            <div ref={messagesEndRef} />
+          </div>
         </div>
-        <div className="font-oxygen">
-          <Logs messages={botLogs} />
-        </div>
-        <form onSubmit={(e) => submitHandler(e)} autoComplete="off">
-          <input
-            type="text"
-            name="input"
-            value={userInput}
-            onChange={(e) => updateInput(e)}
-          />
-        </form>
+        <Submit
+          submitHandler={submitHandler}
+          userInput={userInput}
+          updateInput={updateInput}
+        />
       </div>
     </>
   );
 };
 
 export default Chatbot;
+
+/*
+    <>
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen relative oxygen">
+        <Navbar />
+        <div className="container border-4 border-yellow h-[80%] w-11/12 overflow-y-auto absolute left-0 right-0 mx-auto my-auto top-10">
+          <div className="container border-4 border-white h-[100%] w-7/12 mx-auto">
+            <IntroCard />
+            <div className="yellow">
+              <Logs messages={messages} />
+            </div>
+          </div>
+        </div>
+        <Submit
+          submitHandler={submitHandler}
+          userInput={userInput}
+          updateInput={updateInput}
+        />
+      </div>
+    </>
+    */

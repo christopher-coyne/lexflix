@@ -1,14 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.userMessages {
-  border: 5px solid red;
-}
 
-.botMessages {
-  border: 5px solid blue;
-}
+.background {
+  background: #1e3c72;
+  background: -webkit-linear-gradient(to right, #2a5298, #1e3c72);
+  background: linear-gradient(to right, #2a5298, #1e3c72);
 
-.oxygen {
-  font-family: oxygen;
+  height: 150vh;
+  overflow: none;
 }
