@@ -12,9 +12,12 @@ const metadata_start = {
   sessionState: {},
 };
 function App() {
-  const [userLogs, setUserLogs] = useState([]);
-  const [botLogs, setBotLogs] = useState([
-    { content: "i am the imdb bot. how can i help you today?" },
+  const [messages, setMessages] = useState([
+    {
+      content:
+        "Hello, I’m the Lexflix bot. I can give you movie recommendations, or show you IMDB’s top movies with a certain director or actor. How can I help you today?",
+      type: "bot",
+    },
   ]);
   const [metadata, setMetadata] = useState(metadata_start);
   return (
@@ -24,10 +27,8 @@ function App() {
           path="/"
           element={
             <Chatbot
-              userLogs={userLogs}
-              setUserLogs={setUserLogs}
-              botLogs={botLogs}
-              setBotLogs={setBotLogs}
+              messages={messages}
+              setMessages={setMessages}
               metadata={metadata}
               setMetadata={setMetadata}
             />
