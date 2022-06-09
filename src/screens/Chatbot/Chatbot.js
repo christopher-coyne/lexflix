@@ -12,7 +12,10 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   };
 
   useEffect(scrollToBottom, [messages]);
@@ -95,10 +98,10 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   };
   return (
     <>
-      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen relative">
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center">
         <Navbar />
-        <div className="container h-[65%] w-11/12 overflow-y-auto absolute left-0 right-0 mx-auto my-auto top-20 border-yellow border-4">
-          <div className="container h-[100%] w-7/12 mx-auto">
+        <div className="container border-4 border-yellow h-[80%] w-12/12 overflow-y-auto">
+          <div className="container border-4 border-white h-[100%] w-7/12 mx-auto">
             <IntroCard />
             <Logs messages={messages} />
             <div ref={messagesEndRef} />
@@ -136,3 +139,23 @@ export default Chatbot;
       </div>
     </>
     */
+
+/*
+    <>
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen overflow-y-hidden flex border-yellow border-4">
+        <Navbar />
+        <div className="container h-[80%] w-11/12 overflow-y-auto relative mx-auto my-10 border-yellow border-4">
+          <div className="container w-7/12 mx-auto border-white border-4">
+            <IntroCard />
+            <Logs messages={messages} />
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+        <Submit
+          submitHandler={submitHandler}
+          userInput={userInput}
+          updateInput={updateInput}
+        />
+      </div>
+    </>
+*/
