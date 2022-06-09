@@ -6,18 +6,23 @@ module.exports = {
       current: "currentColor",
       pink: "#E40066",
       midnightPurple: "#12131B",
+      darkPurple: "#20254E",
       yellow: "#EAC435",
       fontLightBlue: "#B6C5E2",
       fontDarkBlue: "#2B4579",
       lightPink: "#FF9CC8",
-      searchBlue: "#20345A",
+      inputBlue: "#20345A",
       white: "#FFFFFF",
+      gradientEndPurple: "#0D1029",
+      gradientEndPink: "#B30656",
+      messageDarkBlue: "#161936",
     },
-    fontFamily: {
-      header: ["sans-serif", "ubuntu"],
-      body: ["sans-serif", "oxygen"],
+    extend: {
+      fontFamily: {
+        ubuntu: "Ubuntu, serif",
+        oxygen: "Oxygen, serif",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
