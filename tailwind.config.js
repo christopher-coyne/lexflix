@@ -21,6 +21,7 @@ module.exports = {
       fontFamily: {
         ubuntu: "Ubuntu, serif",
         oxygen: "Oxygen, serif",
+        lobster: "Lobster, serif",
       },
     },
   },
