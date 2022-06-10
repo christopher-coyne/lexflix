@@ -42,7 +42,10 @@ const getMessage = (
         return msg.content === "..." && msg.type === "bot";
       });
       const msgCopy = [...messages];
-      msgCopy[index] = { ...messages[index], content: value.data.body };
+      msgCopy[index] = {
+        ...messages[index],
+        content: parsed.messages.content,
+      };
       setMessages(msgCopy);
 
       // if we have fulfilled getrecs (or anything...), then reset
