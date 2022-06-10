@@ -146,7 +146,7 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   };
   return (
     <>
-      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center">
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center relative">
         <Navbar />
         <div className="border-4 border-yellow h-[80%] w-[100%] overflow-y-scroll">
           <div className="container border-4 border-white w-7/12 mx-auto max-w-screen-lg sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white">

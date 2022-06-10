@@ -1,11 +1,13 @@
 import React from "react";
 
-const Icon = ({ text, submit }) => {
+const Icon = ({ text, submit, showExtension }) => {
   if (text === "-" || text === "+") {
     return (
-      <button className="text-lightPink bg-pink rounded-full h-10 w-10 font-oxygen text-2xl font-bold">
-        {" "}
-        {text}
+      <button
+        className="text-lightPink bg-pink rounded-full h-10 w-10 font-oxygen text-2xl font-bold"
+        onClick={submit}
+      >
+        {showExtension ? "-" : "+"}
       </button>
     );
   }

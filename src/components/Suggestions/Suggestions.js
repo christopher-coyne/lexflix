@@ -1,5 +1,7 @@
 import React from "react";
+import { useState } from "react";
 import Icon from "./Icon/Icon";
+import Extension from "./Extension/Extension";
 
 const defaultSuggestions = [];
 const lengthSuggestions = ["Don't Care"];
@@ -30,8 +32,11 @@ const genreSuggestions = [
 ];
 
 const Suggestions = ({ metadata, submit }) => {
+  const [showExtension, setShowExtension] = useState(false);
   /* check to see which suggestion we should return*/
-  let currentIcons = defaultSuggestions;
+  let currentIcons = genreSuggestions.slice(0, 3);
+  let currentExtension = genreSuggestions;
+  /*
   if (
     metadata.sessionState.intent &&
     metadata.sessionState.intent.name === "getrecs"
@@ -55,6 +60,7 @@ const Suggestions = ({ metadata, submit }) => {
       }
     }
   }
+  */
 
   // if no length, just return blank
   if (currentIcons.length === 0) {
@@ -63,9 +69,27 @@ const Suggestions = ({ metadata, submit }) => {
   console.log("metadata : ", metadata);
   return (
     <div className="border-white border-4">
-      {currentIcons.concat("+").map((icon) => (
-        <Icon text={icon} key={icon} submit={submit} />
-      ))}
+      {showExtension ? (
+        <Extension
+          currentExtension={currentExtension}
+          submit={(e = null, text) => {
+            setShowExtension(false);
+            submit(e, text);
+          }}
+        />
+      ) : (
+        currentIcons.map((icon) => (
+          <Icon text={icon} key={icon} submit={submit} />
+        ))
+      )}
+
+      <Icon
+        text="+"
+        showExtension={showExtension}
+        submit={() => {
+          showExtension ? setShowExtension(false) : setShowExtension(true);
+        }}
+      />
     </div>
   );
 };
