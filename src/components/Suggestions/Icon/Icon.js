@@ -1,6 +1,6 @@
 import React from "react";
 
-const Icon = ({ text }) => {
+const Icon = ({ text, submit }) => {
   if (text === "-" || text === "+") {
     return (
       <button className="text-lightPink bg-pink rounded-full h-10 w-10 font-oxygen text-2xl font-bold">
@@ -11,6 +11,9 @@ const Icon = ({ text }) => {
   }
   return (
     <button
+      onClick={() => {
+        submit(null, text);
+      }}
       className={`${
         text === "Don't Care" ? "border-yellow" : "border-pink"
       } border-2 ${
