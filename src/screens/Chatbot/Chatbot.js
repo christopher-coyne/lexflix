@@ -4,12 +4,14 @@ import Navbar from "../../components/Navbar";
 import Submit from "../../components/Submit/Submit";
 import IntroCard from "../../components/IntroCard/IntroCard";
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import "./Chatbot.css";
+import getMessage from "./getMessage";
 
 const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   const [userInput, setUserInput] = useState("");
+  // const [oldUserInput, setOldUserInput] = useState("");
   const messagesEndRef = useRef(null);
+  let oldUserInput = useRef("");
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({
@@ -18,14 +20,51 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
     });
   };
 
+  useEffect(() => {
+    // Return early, if this is the first render:
+    let placeHolder = false;
+    for (const msg of messages) {
+      if (msg.content === "...") {
+        placeHolder = true;
+      }
+    }
+
+    if (placeHolder === false) {
+      console.log("placeholder is false!");
+      return;
+    }
+    // Paste code to be executed on subsequent renders:
+    else {
+      console.log(
+        "placeholder detected, going to update, olduserinput : ",
+        oldUserInput.current
+      );
+      const oldUserInputCopy = oldUserInput.current.slice();
+      oldUserInput.current = "";
+      const newMessage = {
+        text: oldUserInputCopy,
+        sessionId: metadata["sessionId"],
+        sessionStarted: metadata["sessionStarted"],
+        sessionState: metadata["sessionState"],
+      };
+      // setUserInput("");
+      console.log("sending new message... ", newMessage);
+      getMessage(newMessage, setMessages, messages, setMetadata, metadata);
+    }
+  }, [messages, setMessages, setMetadata, metadata]);
+
   useEffect(scrollToBottom, [messages]);
   let newUserMessage = "";
   const updateInput = (e) => {
     setUserInput(e.target.value);
+    // setOldUserInput(e.target.value);
   };
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = (e, icon = null) => {
+    if (e) {
+      e.preventDefault();
+    }
 
+    /*
     const newMessage = {
       text: userInput,
       sessionId: metadata["sessionId"],
@@ -33,6 +72,8 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
       sessionState: metadata["sessionState"],
     };
     console.log("sending new message... ", newMessage);
+    */
+
     /*
     axios
       .post(
@@ -57,11 +98,12 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
         }
 
         console.log("fixed parsed : ", parsed);
+        console.log("returned from axios... message : ", messages);
         console.log(
           "session attributes : ",
           parsed.sessionState.sessionAttributes
         );
-        setMessages([...messages, { content: value.data.body, type: 'bot' }]);
+        setMessages([...messages, { content: value.data.body, type: "bot" }]);
 
         // if we have fulfilled getrecs (or anything...), then reset
         if (parsed.sessionState.intent.state === "Fulfilled") {
@@ -84,30 +126,37 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
       });
       */
 
-    newUserMessage = userInput.slice();
+    if (icon) {
+      oldUserInput.current = icon;
+    } else {
+      oldUserInput.current = userInput.slice();
+    }
+    console.log("updating old user input! : ", oldUserInput.current);
+    // setOldUserInput(userInput.slice());
+    setUserInput("");
+    console.log("updating old user input! : ", oldUserInput.current);
 
     setMessages([
       ...messages,
-      { content: newUserMessage, type: "user" },
-      { content: "yeah that makes sense bro", type: "bot" },
+      { content: oldUserInput.current.slice(), type: "user" },
+      { content: "...", type: "bot" },
     ]);
 
     /* take this out when fully testing */
-
-    setUserInput("");
   };
   return (
     <>
       <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center">
         <Navbar />
-        <div className="container border-4 border-yellow h-[80%] w-12/12 overflow-y-auto">
-          <div className="container border-4 border-white h-[100%] w-7/12 mx-auto">
+        <div className="border-4 border-yellow h-[80%] w-[100%] overflow-y-scroll">
+          <div className="container border-4 border-white w-7/12 mx-auto max-w-screen-lg sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white">
             <IntroCard />
             <Logs messages={messages} />
             <div ref={messagesEndRef} />
           </div>
         </div>
         <Submit
+          metadata={metadata}
           submitHandler={submitHandler}
           userInput={userInput}
           updateInput={updateInput}
