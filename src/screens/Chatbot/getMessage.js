@@ -51,18 +51,40 @@ const getMessage = (
         return msg.content === "..." && msg.type === "bot";
       });
       const msgCopy = [...messages];
+
+      let newContent =
+        "Sorry, but we did not find any movie results that matched your query";
+      let cards = [];
+      let isCard = false;
+      if (!getrecsFinished) {
+        newContent = parsed.messages.content;
+      } else {
+        cards = JSON.parse(parsed.messages.content);
+        if (cards.length >= 1) {
+          newContent = cards[0];
+          isCard = true;
+        }
+      }
       msgCopy[index] = {
         ...messages[index],
-        content: !getrecsFinished
-          ? parsed.messages.content
-          : JSON.parse(parsed.messages.content)[0],
-        card: getrecsFinished ? true : false,
+        content: newContent,
+        card: isCard,
       };
 
+      /* after these, should push another bot message that asks user if there is anything
+      else they would like to do */
+
       if (getrecsFinished) {
+        for (const movieCard of cards.slice(1)) {
+          msgCopy.push({
+            content: movieCard,
+            card: true,
+          });
+        }
+
         msgCopy.push({
-          content: JSON.parse(parsed.messages.content)[1],
-          card: true,
+          content: "Is there anything else you would like to do?",
+          card: false,
         });
       }
       console.log("setting new messages... ", msgCopy);
