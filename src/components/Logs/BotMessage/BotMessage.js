@@ -37,11 +37,8 @@ const BotMessage = ({ message }) => {
 */
 
 const BotMessage = ({ message, card }) => {
-  console.log("bot message : ", message);
-  console.log("bot card : ", card);
-
   const containerClassname =
-    "bg-messageDarkBlue text-fontLightBlue pr-4 pl-6 py-3 max-w-[50%] rounded-bl-2xl rounded-tr-2xl rounded-br-2xl rounded-tl-sm  text-left relative";
+    "bg-messageDarkBlue inline-block text-fontLightBlue pr-4 pl-6 py-3 max-w-full xs:max-w-[%85] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%] rounded-bl-2xl rounded-tr-2xl rounded-br-2xl rounded-tl-sm  text-left relative";
 
   /*
   if (card) {
@@ -60,7 +57,7 @@ const BotMessage = ({ message, card }) => {
    * otherwise, return a paragraph, since only text will be shown
    */
   return (
-    <div className="container text-left font-oxygen">
+    <div className="text-left font-oxygen">
       {card ? (
         <div className={containerClassname}>
           {" "}
@@ -73,6 +70,7 @@ const BotMessage = ({ message, card }) => {
           {message}
         </p>
       )}
+      <h6 className="text-fontDarkBlue">12:00 pm</h6>
     </div>
   );
 };

@@ -4,19 +4,19 @@ import Suggestions from "../../components/Suggestions/Suggestions";
 
 const Submit = ({ userInput, updateInput, submitHandler, metadata }) => {
   return (
-    <div className="border-2 border-fontLightBlue w-7/12 container text-right">
+    <div className="w-11/12 border-2 border-fontLightBlue xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 text-right">
       <Suggestions metadata={metadata} submit={submitHandler} />
       <form
         onSubmit={(e) => submitHandler(e)}
         autoComplete="off"
-        className=" w-[100%] h-12 border-4 border-white container"
+        className=" w-full h-12 border-4 border-white flex flex-between md:flex-none"
       >
         <input
           type="text"
           name="input"
           value={userInput}
           onChange={(e) => updateInput(e)}
-          className="bg-inputBlue text-fontLightBlue h-full rounded-md w-[50%] px-2 border-none"
+          className="bg-inputBlue text-fontLightBlue h-full rounded-md px-2 border-none inline-block grow md:w-[50%] md:grow-0 md:ml-auto"
         />
         <button className="bg-inputBlue rounded-md h-full ml-4 w-16 text-center">
           <img src={Triangle} alt="send" className="inline-block" />

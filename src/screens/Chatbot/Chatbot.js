@@ -149,7 +149,7 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
       <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center relative">
         <Navbar />
         <div className="border-4 border-yellow h-[80%] w-[100%] overflow-y-scroll">
-          <div className="container border-4 border-white xl:w-7/12 lg:w-8/12 md:w-9/12 mx-auto max-w-screen-lg sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white">
+          <div className="w-11/12 border-4 border-white xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 mx-auto max-w-screen-lg sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white">
             <IntroCard />
             <Logs messages={messages} />
             <div ref={messagesEndRef} />
