@@ -1,4 +1,6 @@
 import "./App.css";
+import axios from "axios";
+import { useEffect } from "react";
 import Chatbot from "./screens/Chatbot/Chatbot";
 import About from "./screens/About/About";
 import { useState } from "react";
@@ -12,6 +14,19 @@ const metadata_start = {
   sessionState: {},
 };
 function App() {
+  /* wakeup function. use this to make sure lambda gets woken up ASAP */
+  useEffect(() => {
+    console.log("sending wakeup...");
+    const message = JSON.stringify({ wakeup: "true" });
+    axios
+      .post(
+        "https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot",
+        message
+      )
+      .then((value) => {
+        console.log("wakeup return! value : ", value);
+      });
+  }, []);
   const [messages, setMessages] = useState([
     {
       content:
