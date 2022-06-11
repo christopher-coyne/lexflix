@@ -12,7 +12,7 @@ const Logs = ({ messages }) => {
         return msg.type === "user" ? (
           <UserMessage message={msg.content} key={ind} />
         ) : (
-          <BotMessage message={msg.content} key={ind} />
+          <BotMessage message={msg.content} card={msg.card} key={ind} />
         );
       })}
     </>
