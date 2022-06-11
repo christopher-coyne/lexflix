@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
       </div>
       <p className="text-fontLightBlue">{movie.overview}</p>
       {movieLines.map((line) => (
-        <MovieInfoLine label={line} info={movie[line]} />
+        <MovieInfoLine label={line} info={movie[line]} key={line} />
       ))}
       <a href={`${movie.link}`}> Link to IMDB Page </a>
       <p className="my-2 font-bold text-fontLightBlue">
