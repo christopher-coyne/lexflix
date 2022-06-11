@@ -4,9 +4,11 @@ import Icon from "./Icon/Icon";
 import Extension from "./Extension/Extension";
 
 const defaultSuggestions = [];
-const lengthSuggestions = ["Don't Care"];
+const lengthSuggestions = ["90 minutes", "120 minutes", "Don't Care"];
 const certSuggestions = ["G", "PG", "PG-13", "R", "Don't Care"];
-const genreSuggestions = [
+
+const genreSuggestions = ["Comedy", "Fantasy", "Don't Care"];
+const genreExtensions = [
   "comedy",
   "history",
   "war",
@@ -34,9 +36,15 @@ const genreSuggestions = [
 const Suggestions = ({ metadata, submit }) => {
   const [showExtension, setShowExtension] = useState(false);
   /* check to see which suggestion we should return*/
-  let currentIcons = genreSuggestions.slice(0, 3);
-  let currentExtension = genreSuggestions;
-  /*
+  // let currentIcons = genreSuggestions.slice(0, 3);
+  // let currentExtension = genreSuggestions;
+
+  let currentIcons = defaultSuggestions;
+  let currentExtension = defaultSuggestions;
+
+  /* set currentIcons to abridged version of icons triggered by metadata
+   ** set currentExtension to full list of Icons, if they cannot fit
+   */
   if (
     metadata.sessionState.intent &&
     metadata.sessionState.intent.name === "getrecs"
@@ -44,7 +52,8 @@ const Suggestions = ({ metadata, submit }) => {
     if (metadata.sessionState.dialogAction.type === "ElicitSlot") {
       switch (metadata.sessionState.dialogAction.slotToElicit) {
         case "genre":
-          currentIcons = genreSuggestions.slice(0, 3);
+          currentIcons = genreSuggestions;
+          currentExtension = genreExtensions;
           break;
         case "mlength":
           currentIcons = lengthSuggestions;
@@ -60,7 +69,6 @@ const Suggestions = ({ metadata, submit }) => {
       }
     }
   }
-  */
 
   // if no length, just return blank
   if (currentIcons.length === 0) {
