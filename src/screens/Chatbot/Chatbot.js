@@ -39,10 +39,29 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
         "placeholder detected, going to update, olduserinput : ",
         oldUserInput.current
       );
-      const oldUserInputCopy = oldUserInput.current.slice();
+      let oldUserInputCopy = oldUserInput.current.slice();
+
+      // EXCEPTION: if don't care and prev bot message was for length,
+      // send max length
+      if (oldUserInputCopy === "Don't Care") {
+        const allBotMessages = messages.filter(
+          (message) => message.type === "bot"
+        );
+        console.log("most recent bot msg", allBotMessages);
+        if (
+          allBotMessages[allBotMessages.length - 2].content.includes(
+            "max length"
+          )
+        ) {
+          // 326 = max movie length
+          console.log("dont care for max length");
+          oldUserInputCopy = "321";
+        }
+      }
+
       oldUserInput.current = "";
       const newMessage = {
-        text: oldUserInputCopy,
+        text: oldUserInputCopy.toLowerCase(),
         sessionId: metadata["sessionId"],
         sessionStarted: metadata["sessionStarted"],
         sessionState: metadata["sessionState"],
@@ -63,68 +82,6 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
     if (e) {
       e.preventDefault();
     }
-
-    /*
-    const newMessage = {
-      text: userInput,
-      sessionId: metadata["sessionId"],
-      sessionStarted: metadata["sessionStarted"],
-      sessionState: metadata["sessionState"],
-    };
-    console.log("sending new message... ", newMessage);
-    */
-
-    /*
-    axios
-      .post(
-        "https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot",
-        newMessage
-      )
-      .then((value) => {
-        console.log("value returned : ", value);
-
-        // 'mlength': {'value': {'originalValue': 'abc', 'resolvedValues': []}}
-        const parsed = JSON.parse(value.data.body);
-        for (const slot in parsed.sessionState.intent.slots) {
-          if (parsed.sessionState.intent.slots[slot] == null) {
-            parsed.sessionState.intent.slots[slot] = {};
-          }
-          if (
-            parsed.sessionState.intent.slots[slot].value &&
-            !parsed.sessionState.intent.slots[slot].value.interpretedValue
-          ) {
-            parsed.sessionState.intent.slots[slot] = {};
-          }
-        }
-
-        console.log("fixed parsed : ", parsed);
-        console.log("returned from axios... message : ", messages);
-        console.log(
-          "session attributes : ",
-          parsed.sessionState.sessionAttributes
-        );
-        setMessages([...messages, { content: value.data.body, type: "bot" }]);
-
-        // if we have fulfilled getrecs (or anything...), then reset
-        if (parsed.sessionState.intent.state === "Fulfilled") {
-          console.log("fulfilled! reset");
-          setMetadata({
-            ...metadata,
-            sessionState: {
-              intent: { name: "FallbackIntent", slots: {} },
-              sessionAttributes: parsed.sessionState.sessionAttributes,
-            },
-            sessionStarted: true,
-          });
-        } else {
-          setMetadata({
-            ...metadata,
-            sessionState: parsed.sessionState,
-            sessionStarted: true,
-          });
-        }
-      });
-      */
 
     if (icon) {
       oldUserInput.current = icon;
