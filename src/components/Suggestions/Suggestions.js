@@ -4,8 +4,14 @@ import Icon from "./Icon/Icon";
 import Extension from "./Extension/Extension";
 
 const defaultSuggestions = [];
+const getIntentSuggestions = [
+  "Movie Recommendations",
+  "Movies by Director",
+  "Movies by Actors",
+];
 const lengthSuggestions = ["90 minutes", "120 minutes", "Don't Care"];
 const certSuggestions = ["G", "PG", "PG-13", "R", "Don't Care"];
+const foreignSuggestions = ["Foreign", "Domestic", "Don't Care"];
 
 const genreSuggestions = ["Comedy", "Fantasy", "Don't Care"];
 const genreExtensions = [
@@ -45,10 +51,15 @@ const Suggestions = ({ metadata, submit }) => {
   /* set currentIcons to abridged version of icons triggered by metadata
    ** set currentExtension to full list of Icons, if they cannot fit
    */
+
+  console.log("info from suggestions : ", metadata.sessionState.intent);
   if (
-    metadata.sessionState.intent &&
-    metadata.sessionState.intent.name === "getrecs"
+    !metadata.sessionState.intent ||
+    !metadata.sessionState.intent.name ||
+    metadata.sessionState.intent.name === "FallbackIntent"
   ) {
+    currentIcons = getIntentSuggestions;
+  } else if (metadata.sessionState.intent.name === "getrecs") {
     if (metadata.sessionState.dialogAction.type === "ElicitSlot") {
       switch (metadata.sessionState.dialogAction.slotToElicit) {
         case "genre":
@@ -61,8 +72,8 @@ const Suggestions = ({ metadata, submit }) => {
         case "upperboundcert":
           currentIcons = certSuggestions;
           break;
-        case "lowerboundcert":
-          currentIcons = certSuggestions;
+        case "foreign":
+          currentIcons = foreignSuggestions;
           break;
         default:
           currentIcons = defaultSuggestions;
@@ -91,13 +102,15 @@ const Suggestions = ({ metadata, submit }) => {
         ))
       )}
 
-      <Icon
-        text="+"
-        showExtension={showExtension}
-        submit={() => {
-          showExtension ? setShowExtension(false) : setShowExtension(true);
-        }}
-      />
+      {currentExtension.length && (
+        <Icon
+          text="+"
+          showExtension={showExtension}
+          submit={() => {
+            showExtension ? setShowExtension(false) : setShowExtension(true);
+          }}
+        />
+      )}
     </div>
   );
 };
