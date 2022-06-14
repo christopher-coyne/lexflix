@@ -2,7 +2,7 @@ import React from "react";
 import MovieInfoLine from "./components/MovieInfoLine";
 import CardHeader from "../CardHeader/CardHeader";
 
-const movieLabels = ["director", "stars", "genre", "length"];
+const movieLabels = ["director", "actors", "genres", "runtime"];
 const labelToAttr = {
   director: "director",
   actors: "stars",
@@ -33,7 +33,12 @@ const MovieCard = ({ movie }) => {
         <span className="border-2 border-fontLightBlue px-2 rounded-sm mx-3">
           {movie.imdb_rating}/10
         </span>
-        <h6 className="font-light  italic text-sm">What's this?</h6>
+        <a
+          className="font-light  italic text-sm block"
+          href="https://help.imdb.com/article/imdb/track-movies-tv/ratings-faq/G67Y87TFYYP6TWAV#"
+        >
+          What's this?
+        </a>
       </p>
     </>
   );

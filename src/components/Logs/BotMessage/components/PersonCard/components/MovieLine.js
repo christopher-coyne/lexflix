@@ -3,9 +3,11 @@ import React from "react";
 const MovieLine = ({ movie }) => {
   return (
     <>
-      <h6>All movies</h6>
-      <li>
-        <a href={movie.link}>{movie.title}</a> <span>{movie.rating}/10</span>
+      <li className="flex justify-between">
+        <a href={movie.link} className="inline-block">
+          {movie.title}
+        </a>{" "}
+        <span className="font-semibold ">{movie.rating}/10</span>
       </li>
     </>
   );

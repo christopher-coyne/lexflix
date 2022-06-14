@@ -3,11 +3,11 @@ import React from "react";
 const CardHeader = ({ title }) => {
   return (
     <>
-      <button className="text-yellow border text-left border-yellow w-[100%] font-ubuntu font-semibold inline-block">
-        <div className="h-full w-10 bg-yellow border border-yellow inline-block my-0">
+      <button className="text-yellow border border-yellow w-[100%] font-ubuntu font-semibold flex items-stretch justify-between gap-2">
+        <div className=" w-[15%] bg-yellow border border-yellow my-0">
           &nbsp;
         </div>
-        {title}
+        <div className="text-left w-[100%]">{title}</div>
       </button>
     </>
   );

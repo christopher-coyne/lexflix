@@ -21,7 +21,9 @@ const PersonCard = ({ person, type }) => {
           key={label}
         />
       ))}
-      <ul>
+      <h6 className="font-semibold mt-2">All Movies</h6>
+      <hr className="mb-2" />
+      <ul className=" text-fontLightBlue">
         {person &&
           person.movies.map((movie) => {
             return <MovieLine movie={movie} />;
