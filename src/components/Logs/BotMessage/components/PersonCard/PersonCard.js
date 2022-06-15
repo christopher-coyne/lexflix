@@ -4,13 +4,19 @@ import MovieInfoLine from "../MovieCard/components/MovieInfoLine";
 import MovieLine from "./components/MovieLine";
 
 const personLabels = ["Appears In", "Top Genre"];
+const labelsToAfterInfo = {
+  "Appears In": "/1000 of the top IMDB movies",
+};
 const labelToAttr = {
   "Appears In": "is_in",
-  "Top Genre": "top_genre",
+  "Top Genre": "top genre",
 };
 
-const PersonCard = ({ person, type }) => {
+const PersonCard = ({ person, type, open }) => {
   console.log("person : ", person);
+  if (!open) {
+    return <CardHeader title={person.name} />;
+  }
   return (
     <>
       <CardHeader title={person.name} />
@@ -19,6 +25,7 @@ const PersonCard = ({ person, type }) => {
           label={label}
           info={person[labelToAttr[label]]}
           key={label}
+          afterInfo={labelsToAfterInfo[label]}
         />
       ))}
       <h6 className="font-semibold mt-2">All Movies</h6>

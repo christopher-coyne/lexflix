@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieInfoLine = ({ label, info }) => {
+const MovieInfoLine = ({ label, info, afterInfo }) => {
   return (
     <p className="mt-2">
       <span className="text-yellow font-semibold">{label}:</span>{" "}
@@ -9,10 +9,13 @@ const MovieInfoLine = ({ label, info }) => {
           <React.Fragment key={ind}>
             {infoStr}
             {info.length - 1 === ind ? "" : ", "}
+            {afterInfo && afterInfo}
           </React.Fragment>
         ))
       ) : (
-        <>{info}</>
+        <>
+          {info} {afterInfo && afterInfo}
+        </>
       )}
     </p>
   );
