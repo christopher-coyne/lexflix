@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const newContentDict = {
-  recs: "Sorry, but we did not find any movie results that matched your query",
-  director: "Sorry, but we did not find any directors with that name",
-  actor: "Sorry, but we did not find any directors with that name",
+  getrecs:
+    "Sorry, but we did not find any movie results that matched your query. After all, there are only 1000 movies in this database. Try putting a higher rating threshold (r) or making the max runtime a higher value",
+  getmoviesbyactor: "Sorry, but we did not find any directors with that name",
+  getmoviesbydirector:
+    "Sorry, but we did not find any directors with that name",
 };
 
 const getrecsSetMessages = (index, msgCopy, parsed, messages, type) => {
@@ -17,6 +19,9 @@ const getrecsSetMessages = (index, msgCopy, parsed, messages, type) => {
     newContent =
       "Here are your results! Click on any one of them in order to expand or collapse";
     isCard = false;
+  } else {
+    newContent = newContentDict[type];
+    isCard = false;
   }
   msgCopy[index] = {
     ...messages[index],
@@ -24,12 +29,14 @@ const getrecsSetMessages = (index, msgCopy, parsed, messages, type) => {
     card: isCard,
   };
 
-  for (const card of cards) {
+  console.log("cards : ", cards);
+  cards.forEach((card, ind) => {
     msgCopy.push({
       content: card,
       card: type,
+      open: ind === 0 ? true : false,
     });
-  }
+  });
 
   msgCopy.push({
     content: "Is there anything else you would like to do?",
