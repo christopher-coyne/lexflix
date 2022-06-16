@@ -13,15 +13,29 @@ const IntroCard = () => {
         </p>
         <ul className="container flex flex-row font-semibold mt-2">
           <li>
-            <a href="www.google.com">Github</a>
+            <a
+              href="https://github.com/christopher-coyne/lexflix"
+              target={`_blank`}
+            >
+              Github
+            </a>
           </li>
           <li>
-            <a href="www.google.com" className="ml-3">
+            <a
+              href="https://www.google.com"
+              className="ml-3"
+              target={`_blank`}
+              rel="noreferrer noopener"
+            >
               Contact
             </a>
           </li>
           <li>
-            <a href="www.google.com" className="ml-3">
+            <a
+              href="https://github.com/christopher-coyne/imdb_movies"
+              className="ml-3"
+              target={`_blank`}
+            >
               Dataset
             </a>
           </li>
