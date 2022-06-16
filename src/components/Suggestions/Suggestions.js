@@ -12,6 +12,12 @@ const getIntentSuggestions = [
 const lengthSuggestions = ["90 minutes", "120 minutes", "Don't Care"];
 const certSuggestions = ["G", "PG", "PG-13", "R", "Don't Care"];
 const foreignSuggestions = ["Foreign", "Domestic", "Don't Care"];
+const directorSuggestions = [
+  "Martin Scorsese",
+  "Stanley Kubrick",
+  "David Lynch",
+];
+const actorSuggestions = ["Kate Winslet", "Tom Cruise", "Burt Reynolds"];
 
 const genreSuggestions = ["Comedy", "Fantasy", "Don't Care"];
 const genreExtensions = [
@@ -79,6 +85,10 @@ const Suggestions = ({ metadata, submit }) => {
           currentIcons = defaultSuggestions;
       }
     }
+  } else if (metadata.sessionState.intent.name === "moviesbydirector") {
+    currentIcons = directorSuggestions;
+  } else if (metadata.sessionState.intent.name === "moviesbyactor") {
+    currentIcons = actorSuggestions;
   }
 
   // if no length, just return blank
@@ -87,7 +97,7 @@ const Suggestions = ({ metadata, submit }) => {
   }
   console.log("metadata : ", metadata);
   return (
-    <div className="border-white border-4">
+    <div className="transition-all border-4 border-white">
       {showExtension ? (
         <Extension
           currentExtension={currentExtension}
