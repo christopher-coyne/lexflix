@@ -9,14 +9,30 @@ const labelToAttr = {
   genres: "genre",
   runtime: "length",
 };
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, open, ind, setMessages, messages }) => {
+  console.log("open from movie card : ", open, " for movie : ", movie.title);
+  if (open === false) {
+    return (
+      <CardHeader
+        title={movie.title}
+        ind={ind}
+        setMessages={setMessages}
+        messages={messages}
+      />
+    );
+  }
   return (
     <>
-      <CardHeader title={movie.title} />
+      <CardHeader
+        title={movie.title}
+        ind={ind}
+        setMessages={setMessages}
+        messages={messages}
+      />
       <div className="flex flex-row justify-between mt-1">
         <h6 className="font-semibold text-yellow">{movie.released_year}</h6>
         <h6 className="font-semibold text-yellow border border-yellow px-1">
-          {movie.certificate}
+          {movie.certificate === "u" ? "unrated" : movie.certificate}
         </h6>
       </div>
       <p className="text-fontLightBlue">{movie.overview}</p>

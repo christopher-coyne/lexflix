@@ -12,14 +12,26 @@ const labelToAttr = {
   "Top Genre": "top genre",
 };
 
-const PersonCard = ({ person, type, open }) => {
+const PersonCard = ({ person, type, open, ind, setMessages, messages }) => {
   console.log("person : ", person);
   if (!open) {
-    return <CardHeader title={person.name} />;
+    return (
+      <CardHeader
+        title={person.name}
+        ind={ind}
+        setMessages={setMessages}
+        messages={messages}
+      />
+    );
   }
   return (
     <>
-      <CardHeader title={person.name} />
+      <CardHeader
+        title={person.name}
+        ind={ind}
+        setMessages={setMessages}
+        messages={messages}
+      />
       {personLabels.map((label) => (
         <MovieInfoLine
           label={label}
@@ -33,7 +45,7 @@ const PersonCard = ({ person, type, open }) => {
       <ul className=" text-fontLightBlue">
         {person &&
           person.movies.map((movie) => {
-            return <MovieLine movie={movie} />;
+            return <MovieLine movie={movie} key={movie.title} />;
           })}
       </ul>
     </>
