@@ -103,12 +103,12 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   };
   return (
     <>
-      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col border-yellow border-4 justify-between items-center relative">
+      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen flex flex-col justify-between items-center relative">
         <Navbar />
-        <div className="border-4 border-yellow h-[80%] w-[100%] overflow-y-scroll">
-          <div className="w-11/12 border-4 border-white xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 mx-auto max-w-screen-lg sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white">
+        <div className=" h-[60%] w-[100%] overflow-y-scroll lg:h-[70%]">
+          <div className="w-11/12  xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 mx-auto max-w-screen-lg ">
             <IntroCard />
-            <Logs messages={messages} />
+            <Logs messages={messages} setMessages={setMessages} />
             <div ref={messagesEndRef} />
           </div>
         </div>
@@ -126,42 +126,5 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
 export default Chatbot;
 
 /*
-    <>
-      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen relative oxygen">
-        <Navbar />
-        <div className="container border-4 border-yellow h-[80%] w-11/12 overflow-y-auto absolute left-0 right-0 mx-auto my-auto top-10">
-          <div className="container border-4 border-white h-[100%] w-7/12 mx-auto">
-            <IntroCard />
-            <div className="yellow">
-              <Logs messages={messages} />
-            </div>
-          </div>
-        </div>
-        <Submit
-          submitHandler={submitHandler}
-          userInput={userInput}
-          updateInput={updateInput}
-        />
-      </div>
-    </>
-    */
-
-/*
-    <>
-      <div className="bg-gradient-to-b from-midnightPurple to-gradientEndPurple h-screen overflow-y-hidden flex border-yellow border-4">
-        <Navbar />
-        <div className="container h-[80%] w-11/12 overflow-y-auto relative mx-auto my-10 border-yellow border-4">
-          <div className="container w-7/12 mx-auto border-white border-4">
-            <IntroCard />
-            <Logs messages={messages} />
-            <div ref={messagesEndRef} />
-          </div>
-        </div>
-        <Submit
-          submitHandler={submitHandler}
-          userInput={userInput}
-          updateInput={updateInput}
-        />
-      </div>
-    </>
+sm:border-yellow md:border-fontDarkBlue lg:border-yellow xl:border-white
 */
