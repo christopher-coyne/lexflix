@@ -9,7 +9,8 @@ import getMessage from "./getMessage";
 import { suggestionsContext } from "contexts/suggestionsContext";
 
 const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
-  const [userInput, setUserInput] = useState("");
+  console.log("rerendering chatbot...");
+
   const { showExtension, setShowExtension } = useContext(suggestionsContext);
   // const [oldUserInput, setOldUserInput] = useState("");
   const messagesEndRef = useRef(null);
@@ -76,23 +77,19 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
 
   useEffect(scrollToBottom, [messages]);
   let newUserMessage = "";
-  const updateInput = (e) => {
-    setUserInput(e.target.value);
-    // setOldUserInput(e.target.value);
-  };
+
   const submitHandler = (e, icon = null) => {
     if (e) {
       e.preventDefault();
+      console.log("e from submit ", e.target.input.value);
     }
 
     if (icon) {
       oldUserInput.current = icon;
     } else {
-      oldUserInput.current = userInput.slice();
+      oldUserInput.current = e.target.input.value;
+      e.target.input.value = "";
     }
-    console.log("updating old user input! : ", oldUserInput.current);
-    // setOldUserInput(userInput.slice());
-    setUserInput("");
     console.log("updating old user input! : ", oldUserInput.current);
 
     setMessages([
@@ -115,12 +112,7 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
             <div ref={messagesEndRef} />
           </div>
         </div>
-        <Submit
-          metadata={metadata}
-          submitHandler={submitHandler}
-          userInput={userInput}
-          updateInput={updateInput}
-        />
+        <Submit metadata={metadata} submitHandler={submitHandler} />
       </div>
     </>
   );

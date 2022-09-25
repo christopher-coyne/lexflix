@@ -3,57 +3,24 @@ import { useState, useContext } from "react";
 import Icon from "./Icon/Icon";
 import Extension from "./Extension/Extension";
 import { suggestionsContext } from "../../contexts/suggestionsContext";
-
-const defaultSuggestions = [];
-const getIntentSuggestions = [
-  "Movie Recommendations",
-  "Movies by Director",
-  "Movies by Actors",
-];
-const lengthSuggestions = ["90 minutes", "120 minutes", "Don't Care"];
-const certSuggestions = ["G", "PG", "PG-13", "R", "Don't Care"];
-const foreignSuggestions = ["Foreign", "Domestic", "Don't Care"];
-const directorSuggestions = [
-  "Martin Scorsese",
-  "Stanley Kubrick",
-  "David Lynch",
-];
-const actorSuggestions = ["Kate Winslet", "Tom Cruise", "Burt Reynolds"];
-
-const genreSuggestions = ["Comedy", "Fantasy", "Don't Care"];
-const genreExtensions = [
-  "comedy",
-  "history",
-  "war",
-  "thriller",
-  "drama",
-  "music",
-  "western",
-  "action",
-  "animation",
-  "biography",
-  "sci-fi",
-  "mystery",
-  "fantasy",
-  "family",
-  "adventure",
-  "crime",
-  "sport",
-  "horror",
-  "romance",
-  "musical",
-  "film-noir",
-  "Don't Care",
-];
+import {
+  defaultSuggestions,
+  getIntentSuggestions,
+  lengthSuggestions,
+  certSuggestions,
+  foreignSuggestions,
+  directorSuggestions,
+  actorSuggestions,
+  genreSuggestions,
+  genreExtensions,
+} from "data/suggestions";
 
 const Suggestions = ({ metadata, submit }) => {
   // const [showExtension, setShowExtension] = useState(false);
   const { showExtension, setShowExtension } = useContext(suggestionsContext);
   console.log("showing extension?? : ", showExtension);
-  /* check to see which suggestion we should return*/
-  // let currentIcons = genreSuggestions.slice(0, 3);
-  // let currentExtension = genreSuggestions;
 
+  /* check to see which suggestion we should return*/
   let currentIcons = defaultSuggestions;
   let currentExtension = defaultSuggestions;
 
