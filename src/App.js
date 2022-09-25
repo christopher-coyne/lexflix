@@ -5,6 +5,7 @@ import Chatbot from "./screens/Chatbot/Chatbot";
 import About from "./screens/About/About";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SuggestionsContext } from "./contexts/suggestionsContext";
 
 const random_num = () => Math.floor(Math.random() * 10000);
 
@@ -37,20 +38,22 @@ function App() {
   const [metadata, setMetadata] = useState(metadata_start);
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Chatbot
-              messages={messages}
-              setMessages={setMessages}
-              metadata={metadata}
-              setMetadata={setMetadata}
-            />
-          }
-        ></Route>
-        <Route path="/about" element={<About />}></Route>
-      </Routes>
+      <SuggestionsContext>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Chatbot
+                messages={messages}
+                setMessages={setMessages}
+                metadata={metadata}
+                setMetadata={setMetadata}
+              />
+            }
+          ></Route>
+          <Route path="/about" element={<About />}></Route>
+        </Routes>
+      </SuggestionsContext>
     </BrowserRouter>
   );
 }

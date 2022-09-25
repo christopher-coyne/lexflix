@@ -1,10 +1,17 @@
 import React from "react";
 // import {useState} from 'React'
-import BotLogo from "./components/BotLogo/BotLogo";
-import MovieCard from "./components/MovieCard/MovieCard";
-import PersonCard from "./components/PersonCard/PersonCard";
+import { BotLogo } from "./components/BotLogo";
+import { MovieCard } from "./components/MovieCard";
+import { PersonCard } from "./components/PersonCard";
 
-const BotMessage = ({ message, card, open, setMessages, messages, ind }) => {
+export const BotMessage = ({
+  message,
+  card,
+  open,
+  setMessages,
+  messages,
+  ind,
+}) => {
   const containerClassname =
     "bg-messageDarkBlue inline-block text-fontLightBlue pr-4 pl-6 py-3 max-w-full xs:max-w-[%85] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%] rounded-bl-2xl rounded-tr-2xl rounded-br-2xl rounded-tl-sm  text-left relative my-5";
 
@@ -47,6 +54,3 @@ const BotMessage = ({ message, card, open, setMessages, messages, ind }) => {
     </div>
   );
 };
-
-/* bg-darkPurple text-fontLightBlue w-4/6 px-5 py-5 rounded-bl-2xl rounded-tr-2xl rounded-br-2xl rounded-tl-md */
-export default BotMessage;

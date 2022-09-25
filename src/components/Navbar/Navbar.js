@@ -2,7 +2,7 @@ import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <header className="container bg-midnightPurple max-w-none flex justify-between py-1.5 px-8 sm:px-20 text-2xl text-white">
       <Link to={"/"}>
@@ -14,9 +14,3 @@ const Navbar = () => {
     </header>
   );
 };
-
-export default Navbar;
-
-/*
-<div class="container bg-purple w-full">
-*/

@@ -15,7 +15,7 @@ const toggleClose = (ind, setMessages, messages) => {
     console.log("messages after set timeotu : ", messages);
   }, "1000");
 };
-const CardHeader = ({ title, ind, setMessages, messages }) => {
+export const CardHeader = ({ title, ind, setMessages, messages }) => {
   return (
     <>
       <button
@@ -30,5 +30,3 @@ const CardHeader = ({ title, ind, setMessages, messages }) => {
     </>
   );
 };
-
-export default CardHeader;

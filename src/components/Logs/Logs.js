@@ -1,8 +1,8 @@
 import React from "react";
-import BotMessage from "./BotMessage/BotMessage";
-import UserMessage from "./UserMessage/UserMessage";
+import { BotMessage } from "./BotMessage";
+import { UserMessage } from "./UserMessage";
 
-const Logs = ({ messages, setMessages }) => {
+export const Logs = ({ messages, setMessages }) => {
   if (!messages) {
     return <></>;
   }
@@ -27,5 +27,3 @@ const Logs = ({ messages, setMessages }) => {
     </>
   );
 };
-
-export default Logs;

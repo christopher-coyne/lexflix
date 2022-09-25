@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieInfoLine = ({ label, info, afterInfo }) => {
+export const MovieInfoLine = ({ label, info, afterInfo }) => {
   return (
     <p className="mt-2">
       <span className="text-yellow font-semibold">{label}:</span>{" "}
@@ -20,5 +20,3 @@ const MovieInfoLine = ({ label, info, afterInfo }) => {
     </p>
   );
 };
-
-export default MovieInfoLine;

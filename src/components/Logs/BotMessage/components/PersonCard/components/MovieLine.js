@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieLine = ({ movie }) => {
+export const MovieLine = ({ movie }) => {
   return (
     <>
       <li className="flex justify-between">
@@ -12,5 +12,3 @@ const MovieLine = ({ movie }) => {
     </>
   );
 };
-
-export default MovieLine;

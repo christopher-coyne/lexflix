@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css";
-import Navbar from "../../components/Navbar";
+import { Navbar } from "components/Navbar";
 import aboutText from "./aboutText";
 import { Link } from "react-router-dom";
 

@@ -1,14 +1,16 @@
 import React from "react";
-import Logs from "../../components/Logs/Logs";
-import Navbar from "../../components/Navbar";
-import Submit from "../../components/Submit/Submit";
-import IntroCard from "../../components/IntroCard/IntroCard";
-import { useState, useEffect, useRef } from "react";
+import { Logs } from "components/Logs";
+import { Navbar } from "components/Navbar";
+import { Submit } from "components/Submit";
+import { IntroCard } from "components/IntroCard";
+import { useState, useEffect, useRef, useContext } from "react";
 import "./Chatbot.css";
 import getMessage from "./getMessage";
+import { suggestionsContext } from "contexts/suggestionsContext";
 
 const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   const [userInput, setUserInput] = useState("");
+  const { showExtension, setShowExtension } = useContext(suggestionsContext);
   // const [oldUserInput, setOldUserInput] = useState("");
   const messagesEndRef = useRef(null);
   let oldUserInput = useRef("");
@@ -99,6 +101,7 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
       { content: "...", type: "bot" },
     ]);
 
+    setShowExtension(false);
     /* take this out when fully testing */
   };
   return (

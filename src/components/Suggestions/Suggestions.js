@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Icon from "./Icon/Icon";
 import Extension from "./Extension/Extension";
+import { suggestionsContext } from "../../contexts/suggestionsContext";
 
 const defaultSuggestions = [];
 const getIntentSuggestions = [
@@ -46,7 +47,9 @@ const genreExtensions = [
 ];
 
 const Suggestions = ({ metadata, submit }) => {
-  const [showExtension, setShowExtension] = useState(false);
+  // const [showExtension, setShowExtension] = useState(false);
+  const { showExtension, setShowExtension } = useContext(suggestionsContext);
+  console.log("showing extension?? : ", showExtension);
   /* check to see which suggestion we should return*/
   // let currentIcons = genreSuggestions.slice(0, 3);
   // let currentExtension = genreSuggestions;

@@ -1,7 +1,7 @@
 import React from "react";
-import CardHeader from "../CardHeader/CardHeader";
-import MovieInfoLine from "../MovieCard/components/MovieInfoLine";
-import MovieLine from "./components/MovieLine";
+import { CardHeader } from "../CardHeader/CardHeader";
+import { MovieInfoLine } from "../MovieCard/components/MovieInfoLine";
+import { MovieLine } from "./components/MovieLine";
 
 const personLabels = ["Appears In", "Top Genre"];
 const labelsToAfterInfo = {
@@ -12,7 +12,14 @@ const labelToAttr = {
   "Top Genre": "top genre",
 };
 
-const PersonCard = ({ person, type, open, ind, setMessages, messages }) => {
+export const PersonCard = ({
+  person,
+  type,
+  open,
+  ind,
+  setMessages,
+  messages,
+}) => {
   console.log("person : ", person);
   if (!open) {
     return (
@@ -51,5 +58,3 @@ const PersonCard = ({ person, type, open, ind, setMessages, messages }) => {
     </>
   );
 };
-
-export default PersonCard;

@@ -1,6 +1,6 @@
 import React from "react";
-import MovieInfoLine from "./components/MovieInfoLine";
-import CardHeader from "../CardHeader/CardHeader";
+import { MovieInfoLine } from "./components/MovieInfoLine";
+import { CardHeader } from "../CardHeader";
 
 const movieLabels = ["director", "actors", "genres", "runtime"];
 const labelToAttr = {
@@ -9,7 +9,7 @@ const labelToAttr = {
   genres: "genre",
   runtime: "length",
 };
-const MovieCard = ({ movie, open, ind, setMessages, messages }) => {
+export const MovieCard = ({ movie, open, ind, setMessages, messages }) => {
   console.log("open from movie card : ", open, " for movie : ", movie.title);
   if (open === false) {
     return (
