@@ -29,8 +29,11 @@ const getrecsSetMessages = (index, msgCopy, parsed, messages, type) => {
     card: isCard,
   };
 
+  // just want to test with all cards open at first
+
   console.log("cards : ", cards);
   cards.forEach((card, ind) => {
+    ind = 0;
     msgCopy.push({
       content: card,
       card: type,
