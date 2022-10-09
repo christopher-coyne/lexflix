@@ -1,3 +1,11 @@
+# To Do List
+
+Fullstack chatbot that uses AWS services in order to give movie recommendations and IMDB information.
+
+# Screenshots
+
+![screenshot of to do list](./appScreenshot.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
