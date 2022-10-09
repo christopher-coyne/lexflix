@@ -18,16 +18,11 @@ const metadata_start = {
 function App() {
   /* wakeup function. use this to make sure lambda gets woken up ASAP */
   useEffect(() => {
-    console.log("sending wakeup...");
     const message = JSON.stringify({ wakeup: "true" });
-    axios
-      .post(
-        "https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot",
-        message
-      )
-      .then((value) => {
-        console.log("wakeup return! value : ", value);
-      });
+    axios.post(
+      "https://n9i31tpdha.execute-api.us-east-1.amazonaws.com/v1/chatbot",
+      message
+    );
   }, []);
   const [messages, setMessages] = useState([
     {
