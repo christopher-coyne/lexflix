@@ -4,7 +4,7 @@ import Suggestions from "../../components/Suggestions/Suggestions";
 
 export const Submit = ({ submitHandler, metadata }) => {
   return (
-    <div className="w-11/12 xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 text-right border-2 border-yellow h-[40%] xs:h-[30%] lg:h-[20%] md:border-white flex flex-col justify-end pb-5 max-w-screen-lg">
+    <div className="w-11/12 xl:w-7/12 lg:w-8/12 md:w-9/12 sm:w-10/12 text-right h-[40%] xs:h-[30%] lg:h-[20%] flex flex-col justify-end pb-5 max-w-screen-lg">
       <Suggestions metadata={metadata} submit={submitHandler} />
       <form
         onSubmit={(e) => submitHandler(e)}

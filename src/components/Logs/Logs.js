@@ -9,7 +9,6 @@ export const Logs = ({ messages, setMessages }) => {
   return (
     <>
       {messages.map((msg, ind) => {
-        console.log("ind : ", ind);
         return msg.type === "user" ? (
           <UserMessage message={msg.content} key={ind} />
         ) : (

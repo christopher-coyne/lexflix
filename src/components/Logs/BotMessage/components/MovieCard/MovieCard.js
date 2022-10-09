@@ -10,7 +10,6 @@ const labelToAttr = {
   runtime: "length",
 };
 export const MovieCard = ({ movie, open, ind, setMessages, messages }) => {
-  console.log("open from movie card : ", open, " for movie : ", movie.title);
   if (open === false) {
     return (
       <CardHeader

@@ -3,6 +3,7 @@ import "./About.css";
 import { Navbar } from "components/Navbar";
 import aboutText from "./aboutText";
 import { Link } from "react-router-dom";
+import Stack from "../../assets/imdb_bot.png";
 
 const About = () => {
   return (
@@ -15,6 +16,8 @@ const About = () => {
           </Link>
           <h1 className="text-2xl mt-4">What is the stack of this project?</h1>
           <p>{aboutText.stack}</p>
+          <img src={Stack} alt="stack chart" />
+
           <h1 className="text-2xl mt-4">
             Can I get the IMDB data used for this project?
           </h1>
@@ -33,7 +36,5 @@ const About = () => {
     </>
   );
 };
-
-/* <div className="bg-gradient-to-r from-white to-purple">Hello world</div> */
 
 export default About;

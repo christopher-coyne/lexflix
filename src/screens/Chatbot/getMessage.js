@@ -30,8 +30,6 @@ const getrecsSetMessages = (index, msgCopy, parsed, messages, type) => {
   };
 
   // just want to test with all cards open at first
-
-  console.log("cards : ", cards);
   cards.forEach((card, ind) => {
     ind = 0;
     msgCopy.push({
@@ -61,9 +59,7 @@ const getMessage = (
       newMessage
     )
     .then((value) => {
-      console.log("value returned : ", value);
-
-      // 'mlength': {'value': {'originalValue': 'abc', 'resolvedValues': []}}
+      // console.log("got message : ", value);
 
       /* clean data. json may have "none" instead of a {} */
       const parsed = JSON.parse(value.data.body);
@@ -79,18 +75,14 @@ const getMessage = (
         }
       }
 
-      console.log("fixed parsed : ", parsed);
-      console.log("returned from axios... message : ", messages);
+      /*
       console.log(
         "session attributes : ",
         parsed.sessionState.sessionAttributes
       );
+      */
 
-      //setMessages([...messages, { content: value.data.body, type: "bot" }]);
-
-      /* get the last message in state with a ... (loading), create a new array,
-       *
-       */
+      // get the last message in state with a ... (loading), create a new array,
       const intentFinished =
         parsed.sessionState.intent.state === "Fulfilled" &&
         (parsed.sessionState.intent.name === "getrecs" ||
@@ -118,46 +110,11 @@ const getMessage = (
         };
       }
 
-      /*
-      let newContent =
-        "Sorry, but we did not find any movie results that matched your query";
-      let cards = [];
-      let isCard = false;
-      if (!getrecsFinished) {
-        newContent = parsed.messages.content;
-      } else {
-        cards = JSON.parse(parsed.messages.content);
-        if (cards.length >= 1) {
-          newContent = cards[0];
-          isCard = true;
-        }
-      }
-      */
-
-      /* after these, should push another bot message that asks user if there is anything
-      else they would like to do */
-
-      /*
-      if (getrecsFinished) {
-        for (const movieCard of cards.slice(1)) {
-          msgCopy.push({
-            content: movieCard,
-            card: true,
-          });
-        }
-
-        msgCopy.push({
-          content: "Is there anything else you would like to do?",
-          card: false,
-        });
-      }
-      */
-      console.log("setting new messages... ", msgCopy);
       setMessages(msgCopy);
 
       // if we have fulfilled getrecs (or anything...), then reset metadata
       if (parsed.sessionState.intent.state === "Fulfilled") {
-        console.log("fulfilled! reset");
+        // console.log("fulfilled! reset");
         setMetadata({
           ...metadata,
           sessionState: {

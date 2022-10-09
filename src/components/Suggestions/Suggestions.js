@@ -16,9 +16,7 @@ import {
 } from "data/suggestions";
 
 const Suggestions = ({ metadata, submit }) => {
-  // const [showExtension, setShowExtension] = useState(false);
   const { showExtension, setShowExtension } = useContext(suggestionsContext);
-  console.log("showing extension?? : ", showExtension);
 
   /* check to see which suggestion we should return*/
   let currentIcons = defaultSuggestions;
@@ -28,7 +26,6 @@ const Suggestions = ({ metadata, submit }) => {
    ** set currentExtension to full list of Icons, if they cannot fit
    */
 
-  console.log("info from suggestions : ", metadata.sessionState.intent);
   if (
     !metadata.sessionState.intent ||
     !metadata.sessionState.intent.name ||
@@ -65,9 +62,8 @@ const Suggestions = ({ metadata, submit }) => {
   if (currentIcons.length === 0) {
     return <></>;
   }
-  console.log("metadata : ", metadata);
   return (
-    <div className="transition-all border-4 border-white">
+    <div className="transition-all">
       {showExtension ? (
         <Extension
           currentExtension={currentExtension}

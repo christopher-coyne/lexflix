@@ -1,19 +1,11 @@
 import React from "react";
 const toggleClose = (ind, setMessages, messages) => {
-  console.log("header : messages , ", messages);
-  console.log("header : ind : ", ind);
-  console.log("header messages before : ", messages);
   const messagesCopy = [...messages];
   messagesCopy[ind] = {
     ...messages[ind],
     open: messages[ind].open ? false : true,
   };
-  console.log("header messages after : ", messages);
   setMessages(messagesCopy);
-  setTimeout(() => {
-    console.log("Delayed for 1 second.");
-    console.log("messages after set timeotu : ", messages);
-  }, "1000");
 };
 export const CardHeader = ({ title, ind, setMessages, messages }) => {
   return (

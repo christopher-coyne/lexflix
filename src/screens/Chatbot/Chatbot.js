@@ -10,10 +10,7 @@ import { suggestionsContext } from "contexts/suggestionsContext";
 import { useSendMessage } from "hooks/useSendMessage";
 
 const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
-  console.log("rerendering chatbot...");
-  console.log("first messages : ", messages);
-
-  const { showExtension, setShowExtension } = useContext(suggestionsContext);
+  const { setShowExtension } = useContext(suggestionsContext);
   // const [oldUserInput, setOldUserInput] = useState("");
   const messagesEndRef = useRef(null);
 
@@ -31,60 +28,11 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
   };
 
   useSendMessage(messages, setMessages, setMetadata, metadata, oldUserInput);
-  /*
-  useEffect(() => {
-    // Return early, if this is the first render:
-    let placeHolder = false;
-    for (const msg of messages) {
-      if (msg.content === "...") {
-        placeHolder = true;
-      }
-    }
-
-    if (placeHolder === false) {
-      console.log("placeholder is false!");
-      return;
-    }
-    // Paste code to be executed on subsequent renders:
-    else {
-      let oldUserInputCopy = oldUserInput.current.slice();
-
-      // EXCEPTION: if don't care and prev bot message was for length,
-      // send max length
-      if (oldUserInputCopy === "Don't Care") {
-        const allBotMessages = messages.filter(
-          (message) => message.type === "bot"
-        );
-        console.log("most recent bot msg", allBotMessages);
-        if (
-          allBotMessages[allBotMessages.length - 2].content.includes(
-            "max length"
-          )
-        ) {
-          // 326 = max movie length
-          oldUserInputCopy = "321";
-        }
-      }
-
-      oldUserInput.current = "";
-      const newMessage = {
-        text: oldUserInputCopy.toLowerCase(),
-        sessionId: metadata["sessionId"],
-        sessionStarted: metadata["sessionStarted"],
-        sessionState: metadata["sessionState"],
-      };
-      // setUserInput("");
-      getMessage(newMessage, setMessages, messages, setMetadata, metadata);
-    }
-  }, [messages, setMessages, setMetadata, metadata]);
-  */
-
   useEffect(scrollToBottom, [messages]);
 
   const submitHandler = (e, icon = null) => {
     if (e) {
       e.preventDefault();
-      console.log("e from submit ", e.target.input.value);
     }
 
     // if submitted by clicking a button (icon) use that button's exact text as input
@@ -94,7 +42,6 @@ const Chatbot = ({ setMessages, messages, metadata, setMetadata }) => {
       oldUserInput.current = e.target.input.value;
       e.target.input.value = "";
     }
-    console.log("updating old user input! : ", oldUserInput.current);
 
     setMessages([
       ...messages,

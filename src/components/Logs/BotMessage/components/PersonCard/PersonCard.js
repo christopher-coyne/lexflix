@@ -20,7 +20,6 @@ export const PersonCard = ({
   setMessages,
   messages,
 }) => {
-  console.log("person : ", person);
   if (!open) {
     return (
       <CardHeader
